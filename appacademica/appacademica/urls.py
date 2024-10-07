@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from academica.views import hola_mundo, saludo, edad
+from academica.views import hola_mundo, saludo, edad, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo/', hola_mundo),
     path('saludo/<str:nombre>/', saludo),
     path('edad/<int:edad>/', edad),
+    path('', index),
 ]
