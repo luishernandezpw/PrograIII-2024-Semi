@@ -23,5 +23,5 @@ urlpatterns = [
     path('saludo/', hola_mundo),
     path('saludo/<str:nombre>/', saludo),
     path('edad/<int:edad>/', edad),
-    path('', index),
+    path('<str:nombre>/', index),
 ]
