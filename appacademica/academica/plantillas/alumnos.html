@@ -62,7 +62,7 @@
         enviarDatosAlumno(datos);
     });
     function enviarDatosAlumno(datos){
-        fetch('/alumnos',{
+        fetch('guardar_alumno/',{
                 method : 'POST',
                 body : JSON.stringify(datos)
             })
@@ -77,7 +77,7 @@
     }
     function modificarAlumno(alumno){
         frmAlumno.dataset.accion = 'modificar';
-        frmAlumno.dataset.idalumno = alumno.idAlumno;
+        frmAlumno.dataset.idalumno = alumno.id;
         txtCodigoAlumno.value = alumno.codigo;
         txtNombreAlumno.value = alumno.nombre;
         txtDireccionAlumno.value = alumno.direccion;
