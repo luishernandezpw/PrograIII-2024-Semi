@@ -34,6 +34,15 @@
                 </div>
             </div>
             <div class="row p-1">
+                <div class="col-3 col-md-2">HASH </div>
+                <div class="col-9 col-md-10">
+                    <span id="spnHashAlumno"></span>
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-12 col-md-4 text-center d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary" onclick="generarHashAlumno()">Generar HASH</button>
+                </div>
                 <div class="col-12 col-md-4 text-center d-grid gap-2">
                     <button type="submit" class="btn btn-outline-primary">Guardar</button>
                 </div>
@@ -48,9 +57,7 @@
     </div>
 </form>
 <script>
-    document.querySelector('#frmAlumno').addEventListener('submit', (e)=>{
-        e.preventDefault();
-        
+    function recogerDatosAlumnos(){
         let datos = {
             accion : frmAlumno.dataset.accion,
             idAlumno : frmAlumno.dataset.idalumno,
@@ -59,12 +66,23 @@
             direccion : txtDireccionAlumno.value,
             telefono : txtTelefonoAlumno.value
         };
+        return JSON.stringify(datos);
+    }
+    function generarHashAlumno(){
+        let datos = recogerDatosAlumnos(),
+            hash = CryptoJS.SHA256(datos).toString();
+        document.querySelector('#spnHashAlumno').innerText = hash;
+    }
+    document.querySelector('#frmAlumno').addEventListener('submit', (e)=>{
+        e.preventDefault();
+        
+        let datos = recogerDatosAlumnos();
         enviarDatosAlumno(datos);
     });
     function enviarDatosAlumno(datos){
         fetch('guardar_alumno/',{
                 method : 'POST',
-                body : JSON.stringify(datos)
+                body : datos
             })
             .then(res => res.json())
             .then(data => {
